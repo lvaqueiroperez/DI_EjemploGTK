@@ -6,7 +6,7 @@ from gi.repository import Gtk
 class VentanaPrincipal():
     def __init__(self):
         builder = Gtk.Builder()
-        # Este "builder" permite construír en el código las ventanas hechas externamente, para poder manejar esos
+        # Este "builder" permite construír en el código las ventanas hechas externamente en Glade, para poder manejar esos
         # objetos gtk e interactuar con ellos desde python
 
         builder.add_from_file("EjemploGlade1.glade")
@@ -29,6 +29,7 @@ class VentanaPrincipal():
 
         ventanaMain1.show_all()
 
+    #Hay que definir las señales del gtk como métodos del propio python:
 
     def on_btnSaludar_clicked (self,boton):
         "Método que maneja el señal clicked del btnSaludar"
@@ -40,7 +41,7 @@ class VentanaPrincipal():
         self.on_btnSaludar_clicked(cuadroTexto)
 
 
-
+#activamos nuestra interfaz gráfica
 if __name__ == "__main__":
     VentanaPrincipal()
     Gtk.main()

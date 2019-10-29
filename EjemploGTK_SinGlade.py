@@ -3,6 +3,7 @@ gi.require_version('Gtk','3.0')
 from gi.repository import Gtk
 
 #Vamos a crear interfaces sin el uso de Glaide:
+#Tendrenis que heredar de Window
 class VentanaPrincipal(Gtk.Window):
 
     def __init__(self):
