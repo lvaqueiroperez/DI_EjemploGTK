@@ -1,11 +1,9 @@
-"""EJERCICIO:
-    Modificación de este programa: detectar que el nombre puesto no pueda estar vacío, escribiendo un mensaje qu e diga 'debes escribir tu nombre'
-     en color rojo o con background en rojo"""
-"""Buscar propiedades en la API"""
-
 import gi
 gi.require_version('Gtk','3.0')
 from gi.repository import Gtk
+
+#importamos nuevas cosas:
+from gi.repository import Gdk
 
 #Vamos a crear interfaces sin el uso de Glaide:
 class VentanaPrincipal(Gtk.Window):
@@ -13,6 +11,13 @@ class VentanaPrincipal(Gtk.Window):
     def __init__(self):
 
         Gtk.Window.__init__(self,title = "Ejemplo saludo GTK")
+
+        #Creamos un "css provider" y lo necesario
+        cssProvider = Gtk.CssProvider()
+        cssProvider.load_from_path('./estilos.css')
+        screen = Gdk.Screen.get_default()
+        styleContext = Gtk.StyleContext()
+        styleContext.add_provider_for_screen (screen, cssProvider,Gtk.STYLE_PROVIDER_PRIORITY_USER)
 
         #Creamos una caja y podemos aplicarle una separación a los elementos
         # Nuestro "box" por defecto define los elementos en horizontal, para cambiar y ponerla en vertical:
