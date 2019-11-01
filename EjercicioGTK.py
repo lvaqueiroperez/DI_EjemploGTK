@@ -1,5 +1,5 @@
 """EJERCICIO:
-    Modificación de este programa: detectar que el nombre puesto no pueda estar vacío, escribiendo un mensaje qu e diga 'debes escribir tu nombre'
+    Modificación de este programa: detectar que el nombre puesto no pueda estar vacío, escribiendo un mensaje que diga 'debes escribir tu nombre'
      en color rojo o con background en rojo"""
 """Buscar propiedades en la API"""
 
@@ -60,7 +60,7 @@ class VentanaPrincipal(Gtk.Window):
     #UTILIZAMOS ETIQUETAS DE XML/HTML PARA CAMBIAR LAS PROPIEDADES DE ESTA MANERA:
 
             self.lbSaludo.set_markup("<span color='red'>Introduzca su nombre</span>")
-    #
+    
 
         else:
             self.lbSaludo.set_text("Hola " + nombre)
