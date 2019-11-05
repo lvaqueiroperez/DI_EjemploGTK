@@ -2,18 +2,21 @@
 <!-- Generated with glade 3.22.1 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
-  <object class="GtkWindow">
+  <object class="GtkWindow" id="ventanaMain">
+    <property name="name">ventanaMain</property>
+    <property name="visible">True</property>
     <property name="can_focus">False</property>
     <child>
       <placeholder/>
     </child>
     <child>
-      <object class="GtkGrid">
+      <object class="GtkGrid" id="contGrid">
+        <property name="name">contGrid</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <child>
           <object class="GtkButton" id="boton1">
-            <property name="label" translatable="yes">button</property>
+            <property name="label" translatable="yes">Boton1</property>
             <property name="name">boton1</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
@@ -25,8 +28,9 @@
           </packing>
         </child>
         <child>
-          <object class="GtkButton">
-            <property name="label" translatable="yes">button</property>
+          <object class="GtkButton" id="boton3">
+            <property name="label" translatable="yes">Boton3</property>
+            <property name="name">boton3</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
@@ -38,8 +42,9 @@
           </packing>
         </child>
         <child>
-          <object class="GtkButton">
-            <property name="label" translatable="yes">button</property>
+          <object class="GtkButton" id="boton2">
+            <property name="label" translatable="yes">Boton2</property>
+            <property name="name">boton2</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
@@ -51,8 +56,9 @@
           </packing>
         </child>
         <child>
-          <object class="GtkButton">
-            <property name="label" translatable="yes">button</property>
+          <object class="GtkButton" id="boton4">
+            <property name="label" translatable="yes">Boton4</property>
+            <property name="name">boton4</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
@@ -64,8 +70,9 @@
           </packing>
         </child>
         <child>
-          <object class="GtkButton">
-            <property name="label" translatable="yes">button</property>
+          <object class="GtkButton" id="boton5">
+            <property name="label" translatable="yes">Boton5</property>
+            <property name="name">boton5</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
@@ -76,8 +83,9 @@
           </packing>
         </child>
         <child>
-          <object class="GtkButton">
-            <property name="label" translatable="yes">button</property>
+          <object class="GtkButton" id="boton6">
+            <property name="label" translatable="yes">Boton6</property>
+            <property name="name">boton6</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>

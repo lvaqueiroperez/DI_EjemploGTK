@@ -17,6 +17,8 @@ class VentanaPrincipal(Gtk.Window):
         # Añadir al constructor "Gtk.Orientation.VERTICAL"
         caja = Gtk.Box(spacing=6, orientation=Gtk.Orientation.VERTICAL)
 
+        #Ponemos los elementos como "self." para que se puedan usar en funciones (?)
+
         # Una vez creada la Ventana y la Caja, empezamos a CREAR Y CONFIGURAR los elementos de la interfaz
         self.btnSaludar = Gtk.Button(label="Saludo")
         # Configuramos la señal que tendrá este elemento y a que método accederá (definimos el método más adelante)
@@ -24,6 +26,7 @@ class VentanaPrincipal(Gtk.Window):
 
         # Cada vez que introducimos un elemento nuevo, habrá que añadirlo con "pack_start()" o "pack_end()"
         # "pack_start" va de izq a derch, "pack_end" va de derech a izq
+        #qué son los otros parámetros???
         caja.pack_end(self.btnSaludar, True, True, 6)
 
         self.txtNombre = Gtk.Entry()

@@ -3,11 +3,12 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
-#LO MUESTRA MAL?????????
+
+# LO MUESTRA MAL?????????
 # Cración de Notebook GTK usando solo código Y REUTILIZANDO EL CÓDIGO DE "EjemploGTKGrid" DE ANTES
 class Ventana(Gtk.Window):
     def __init__(self):
-        Gtk.Window.__init__(self, title="EJemplo con Gtk Notebook")
+        Gtk.Window.__init__(self, title="Ejemplo con Gtk Notebook")
 
         notebook = Gtk.Notebook()
         self.add(notebook)
@@ -26,18 +27,15 @@ class Ventana(Gtk.Window):
 
         notebook.append_page(pagina3, Gtk.Label("Botones pag 3"))
 
-
         # Añadimos la función de salir de la ventana
         self.connect("destroy", Gtk.main_quit)
 
         # Y las mostramos
         self.show_all()
 
-        # VAMOS A USAR EL CÓDIGO DE "EJEMPLOGTKGRID"
 
-        ####################################################
-
-
+# VAMOS A USAR EL CÓDIGO DE "EJEMPLOGTKGRID"
+####################################################
 class Panel(Gtk.Grid):
     def __init__(self):
         # ESTO NO HACE FALTA --->  Gtk.Window.__init__(self, title="EJemplo con Gtk.Grid")
@@ -79,8 +77,6 @@ class Panel(Gtk.Grid):
 
         # Una vez tengamos todos listo, añadimos la grid
         self.add(grid)
-
-
 
         #################################################
 
