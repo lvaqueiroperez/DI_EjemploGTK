@@ -26,6 +26,12 @@ class Ventana(Gtk.Window):
         pagina3 = Panel()
 
         notebook.append_page(pagina3, Gtk.Label("Botones pag 3"))
+        
+        pagina4 = Gtk.Box()
+        pagina4.set_border_width(10)
+        pagina4.add(Gtk.Label("Página con icono en la pestaña"))
+        notebook.append_page(pagina4,Gtk.Image.new_from_icon_name("help-about",Gtk.IconSize.MENU))
+
 
         # Añadimos la función de salir de la ventana
         self.connect("destroy", Gtk.main_quit)
@@ -62,18 +68,19 @@ class Panel(Gtk.Grid):
         self.attach(boton2, 1, 0, 2, 1)
 
         # Podemos añadir y situar botones con "next_to" de manera más fácil
-        self.attach_next_to(boton3, boton1, Gtk.PositionType.BOTTOM, 1, 2)
+        self.attach_next_to(boton4, boton2, Gtk.PositionType.BOTTOM, 2, 1)
+        self.attach_next_to(boton5, boton4, Gtk.PositionType.BOTTOM, 1, 1)
+        self.attach_next_to(boton6, boton5, Gtk.PositionType.RIGHT, 1, 1)
         self.attach(boton4, 1, 1, 2, 1)
 
         # Creamos una caja
         # Por defecto, las cajas tienen orientación horizontal
-        caja = Gtk.Box()
+        caja = Gtk.Box(orientation = Gtk.Orientation.VERTICAL)
 
-        caja.pack_start(boton5, True, True, 0)
-        caja.pack_start(boton6, True, True, 0)
+
         caja.pack_start(boton7, True, True, 0)
 
-        self.attach_next_to(caja, boton4, Gtk.PositionType.BOTTOM, 1, 1)
+        self.attach_next_to(caja, boton1, Gtk.PositionType.BOTTOM, 1, 1)
 
         # Una vez tengamos todos listo, añadimos la grid
         self.add(grid)
