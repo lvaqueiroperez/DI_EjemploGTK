@@ -4,6 +4,7 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
 #LA MAYOR DIFERENCIA ENTRE STACK Y NOTEBOOK ES QUE EL NOTEBOOK TIENE MÁS MÉTODOS ÚTILES
+#NO VA EL EFECTO DE TRANSICIÓN???
 class Ventana(Gtk.Window):
     def __init__(self):
         Gtk.Window.__init__(self, title="Ejemplo stack")
@@ -36,7 +37,7 @@ class Ventana(Gtk.Window):
         self.connect("destroy", Gtk.main_quit)
         self.show_all()
 
-        # Usamos clase panel
+        # Usamos clase panel que contiene la Grid()
         ####################################################
 
 
