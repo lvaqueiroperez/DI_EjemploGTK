@@ -22,6 +22,8 @@ class VentanaGrid():
         boton5 = builder.get_object("boton5")
         boton6 = builder.get_object("boton6")
 
+        ventanaMain.connect("destroy",Gtk.main_quit)
+
         ventanaMain.show_all()
 
 
