@@ -19,13 +19,14 @@ class VentanaPrincipal(Gtk.Window):
 
         # Ponemos los elementos como "self." para que se puedan usar en funciones (?)
 
-        # Una vez creada la Ventana y la Caja, empezamos a CREAR Y CONFIGURAR los elementos de la interfaz
+        # Una vez creada la Ventana y la Caja, empezamos a CREAR Y CONFIGURAR los elementos de la interfaz QUE IRÁN EN LA CAJA
         self.btnSaludar = Gtk.Button(label="Saludo")
         # Configuramos la señal que tendrá este elemento y a que método accederá (definimos el método más adelante)
+        #Cada señal tiene un nombre !!!
         self.btnSaludar.connect("clicked", self.on_btnSaludar_clicked)
 
         # Cada vez que introducimos un elemento nuevo, habrá que añadirlo con "pack_start()" o "pack_end()" al elemento que queramos (en este caso a la caja)
-        # "pack_start" va de izq a derch, "pack_end" va de derech a izq
+        # "pack_start" va de izq a derch, "pack_end" va de derech a izq /Y en Vertical de arriba a abajo, abajo a arriba
         # qué son los otros parámetros???
         caja.pack_end(self.btnSaludar, True, True, 6)
 
@@ -45,7 +46,7 @@ class VentanaPrincipal(Gtk.Window):
 
         # Añadimos la caja a nuestra Ventana Principal
         self.add(caja)
-        # Configuramos el cierre de la ventana
+        # Configuramos el cierre de la ventana principal
         self.connect("destroy", Gtk.main_quit)
 
         # Mostramos todos los elementos de la interfaz

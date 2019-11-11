@@ -9,29 +9,30 @@ from gi.repository import Gtk
 class Ventana(Gtk.Window):
     def __init__(self):
         Gtk.Window.__init__(self, title="Ejemplo con Gtk Notebook")
-
+        # Creamos componente Notebook
         notebook = Gtk.Notebook()
-        self.add(notebook)
 
+        # Creamos "páginas" del notebook a partir de los componentes que queramos, una caja por ejemplo:
         pagina1 = Gtk.Box()
         pagina1.set_border_width(10)
         pagina1.add(Gtk.Label("Página por defecto"))
-
+        # Añadimos la "página" a nuestro notebook, pudiendo darle un título a la solapa:
         notebook.append_page(pagina1, Gtk.Label("Título de la solapa"))
 
-        # Creamos un objeto de la Clase reutilizada "Panel"
+        # Creamos un objeto de la Clase reutilizada "Panel" y lo añadimos como página
         pagina2 = Panel()
         notebook.append_page(pagina2, Gtk.Label("Botones"))
 
         pagina3 = Panel()
 
         notebook.append_page(pagina3, Gtk.Label("Botones pag 3"))
-        
+
         pagina4 = Gtk.Box()
         pagina4.set_border_width(10)
         pagina4.add(Gtk.Label("Página con icono en la pestaña"))
-        notebook.append_page(pagina4,Gtk.Image.new_from_icon_name("help-about",Gtk.IconSize.MENU))
+        notebook.append_page(pagina4, Gtk.Image.new_from_icon_name("help-about", Gtk.IconSize.MENU))
 
+        self.add(notebook)
 
         # Añadimos la función de salir de la ventana
         self.connect("destroy", Gtk.main_quit)
@@ -45,11 +46,10 @@ class Ventana(Gtk.Window):
 class Panel(Gtk.Grid):
     def __init__(self):
         # ESTO NO HACE FALTA --->  Gtk.Window.__init__(self, title="EJemplo con Gtk.Grid")
-
+        # NECESITAREMOS UN GRID, NO UNA VENTANA:
         Gtk.Grid.__init__(self)
 
         grid = Gtk.Grid()
-        self.add(grid)
 
         boton1 = Gtk.Button(label="Boton1")
         boton2 = Gtk.Button(label="Boton2")
@@ -71,12 +71,11 @@ class Panel(Gtk.Grid):
         self.attach_next_to(boton4, boton2, Gtk.PositionType.BOTTOM, 2, 1)
         self.attach_next_to(boton5, boton4, Gtk.PositionType.BOTTOM, 1, 1)
         self.attach_next_to(boton6, boton5, Gtk.PositionType.RIGHT, 1, 1)
-        self.attach(boton4, 1, 1, 2, 1)
+
 
         # Creamos una caja
         # Por defecto, las cajas tienen orientación horizontal
-        caja = Gtk.Box(orientation = Gtk.Orientation.VERTICAL)
-
+        caja = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
 
         caja.pack_start(boton7, True, True, 0)
 
@@ -84,7 +83,7 @@ class Panel(Gtk.Grid):
 
         # Una vez tengamos todos listo, añadimos la grid
         self.add(grid)
-
+        #Esto es una clase Grid que usaremos en nuestra interfaz, NO ES LA VENTANA PRINCIPAL DE LA INTERFAZ
         #################################################
 
 

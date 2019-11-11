@@ -10,7 +10,6 @@ class Ventana(Gtk.Window):
         Gtk.Window.__init__(self, title="EJemplo con Gtk.Grid")
 
         grid = Gtk.Grid()
-        self.add(grid)
 
         boton1 = Gtk.Button(label="Boton1")
         boton2 = Gtk.Button(label="Boton2")
@@ -20,10 +19,10 @@ class Ventana(Gtk.Window):
         boton6 = Gtk.Button(label="Boton6")
         boton7 = Gtk.Button(label="Boton7")
 
-        # El primer botón solo hace falta añadirlo, los demás se añadirán tomándolo como referencia
+        # El primer botón solo hace falta añadirlo para que aparezca en 0,0 (esquina superior izquierda), los demás se añadirán tomándolo como referencia
         grid.add(boton1)
 
-        # tras indicar el parámetro, podemos indicar su posición COLUMNA-FILA,y su ancho y alto
+        # Tras indicar el parámetro, podemos indicar su posición COLUMNA-FILA,y su ancho y alto
 
         grid.attach(boton2, 1, 0, 2, 1)
 
@@ -31,7 +30,9 @@ class Ventana(Gtk.Window):
         grid.attach_next_to(boton3, boton1, Gtk.PositionType.BOTTOM, 1, 2)
         grid.attach(boton4, 1, 1, 2, 1)
 
-        # Creamos una caja
+        #Si vemos que un elemento no se añade como esperamos en la interfaz, probar a ponerlo dentro de otros, como
+        #dentro de una caja o de un grid !!!!
+        # Creamos una caja para los botones 5,6,7
         # Por defecto, las cajas tienen orientación horizontal
         caja = Gtk.Box()
 

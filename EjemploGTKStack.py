@@ -3,17 +3,18 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
-#LA MAYOR DIFERENCIA ENTRE STACK Y NOTEBOOK ES QUE EL NOTEBOOK TIENE MÁS MÉTODOS ÚTILES
-#NO VA EL EFECTO DE TRANSICIÓN???
+
+# LA MAYOR DIFERENCIA ENTRE STACK Y NOTEBOOK ES QUE EL NOTEBOOK TIENE MÁS MÉTODOS ÚTILES
+# NO VA EL EFECTO DE TRANSICIÓN??? PARA QUÉ SIRVE LA CAJA CREADA???
 class Ventana(Gtk.Window):
     def __init__(self):
         Gtk.Window.__init__(self, title="Ejemplo stack")
 
+        # Creamos una caja
         caja = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
-
-        self.add(caja)
-
+        # Creamos el Stack
         stack = Gtk.Stack()
+        # Podemos poner un efecto de transición a sus elementos
         stack.set_transition_type(Gtk.StackTransitionType.SLIDE_LEFT_RIGHT)
         stack.set_transition_duration(1000)
 
@@ -34,6 +35,8 @@ class Ventana(Gtk.Window):
         caja.pack_start(stack_switcher, True, True, 0)
         caja.pack_start(stack, True, True, 0)
 
+        self.add(caja)
+
         self.connect("destroy", Gtk.main_quit)
         self.show_all()
 
@@ -48,7 +51,6 @@ class Panel(Gtk.Grid):
         Gtk.Grid.__init__(self)
 
         grid = Gtk.Grid()
-        self.add(grid)
 
         boton1 = Gtk.Button(label="Boton1")
         boton2 = Gtk.Button(label="Boton2")
@@ -70,7 +72,6 @@ class Panel(Gtk.Grid):
         self.attach_next_to(boton4, boton2, Gtk.PositionType.BOTTOM, 2, 1)
         self.attach_next_to(boton5, boton4, Gtk.PositionType.BOTTOM, 1, 1)
         self.attach_next_to(boton6, boton5, Gtk.PositionType.RIGHT, 1, 1)
-        self.attach(boton4, 1, 1, 2, 1)
 
         # Creamos una caja
         # Por defecto, las cajas tienen orientación horizontal
