@@ -53,6 +53,7 @@
       <object class="GtkComboBox" id="cboxDende">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <signal name="changed" handler="on_cboxDende_changed" swapped="no"/>
       </object>
       <packing>
         <property name="left_attach">1</property>

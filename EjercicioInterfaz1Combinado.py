@@ -47,12 +47,32 @@ class Ventana(Gtk.Window):
         # PODEMOS RECOGER ELEMENTOS ECHOS EN GLADE EN NUESTRO
         # CÓDIGO PARA TRABAJAR CON ELLOS O MODIFICARLOS
         self.txtEntData = builder.get_object("txtEntData")
+        self.cboxDende = builder.get_object("cboxDende")
+        # EN GLADE, DEFINIMOS EL MANIPULADOR DE "CHANGED" DE cboxDende
+
         # Creamos señales que accederán a métodos
         # OJO, AL USAR CON GLADE LAS SEÑALES ACTIVATE O CUALQUIERA QUE
         # USEMOS TIENEN QUE ESTAR ESPECIFICADAS EN EL PROPIO GLADE !!!
-        señales = {"on_txtEntData_activate": self.on_txtEntData_activate}
+        señales = {"on_txtEntData_activate": self.on_txtEntData_activate,
+                   "on_cboxDende_changed": self.on_cboxDende_changed}
 
         builder.connect_signals(señales)
+
+        # CREAMOS UNA LIST STORE PARA...
+        lista_destinos = Gtk.ListStore(int, str, str)
+        # Para añadir elementos:
+        lista_destinos.append([1, "Vigo", "VGO"])
+        lista_destinos.append([1, "Santiago de Compostela", "STO"])
+        lista_destinos.append([5, "Madrid", "MD"])
+        lista_destinos.append([3, "Barcelona", "BCN"])
+
+        self.cboxDende.set_model(lista_destinos)
+        # PONEMOS EN EL COMBOBOX DATOS
+        celdaTexto = Gtk.CellRendererText()
+
+        self.cboxDende.pack_start(celdaTexto, True)
+        # Queremos que inicialmente muestre la columna 1 como texto
+        self.cboxDende.add_attribute(celdaTexto, "text", 2)
 
         # Creamos el formulario de opciones a través de un frame que contendrá una caja con 3 RadioButtons
         frmOpcions = Gtk.Frame()
@@ -88,9 +108,17 @@ class Ventana(Gtk.Window):
         txvVoosDisponibles = Gtk.TextView()
         # PARA RECOGER UNA REFERENCIA AL BUFFER DEL TEXTVIEW:
         self.bufferTxv = txvVoosDisponibles.get_buffer()
+        txvVoosDisponibles.set_editable(False)
+        txvVoosDisponibles.set_justification(Gtk.Justification.CENTER)
+        # CREAMOS UN SCROLL
+        ventanaScroll = Gtk.ScrolledWindow()
+        ventanaScroll.set_hexpand(True)
+        ventanaScroll.set_vexpand(True)
+        ventanaScroll.add(txvVoosDisponibles)
         frame2.set_label("Voos disponibles")
-        # Añadimos al frame la textview
-        frame2.add(txvVoosDisponibles)
+        # Añadimos al frame la textview LO COMENTAMOS PARA IMPLEMENTAR EL SCROLL
+        # frame2.add(txvVoosDisponibles)
+        frame2.add(ventanaScroll)
         # Añadimos a la caja principal el frame de su segundo elemento
         caixaVMain.pack_start(frame2, True, True, 0)
 
@@ -117,12 +145,24 @@ class Ventana(Gtk.Window):
         # El métofo "set_text" del buffer sobreescribe el texto anterior
         # Para conseguir que no se sobreescriba, usaremos el método
         # "insert(posición,texto): la posición viene dada por un TextIterator"
+        # SE HA IMPLEMENTADO QUE, AL  SUBRAYAR UNA PORCIÓN DEL TEXTO DE LA TEXTVIEW, PODAMOS SUSTITUIRLO CON OTRO AL DARLE ----PENDIENTE-----
+        # AL ENTER EN EL TEXTENTRY
+        # seleccion = self.bufferTxv.get_selection
+        # fondo_naranja=self.bufferTxv.create_tag.....
+        # self.bufferTxv.delete(seleccion[0])
         posFin = self.bufferTxv.get_end_iter()
 
         self.bufferTxv.insert_markup(posFin, "<b>" + self.txtEntData.get_text() + "</b>", -1)
 
         self.bufferTxv.insert(posFin, "\n", -1)
         # -1 se pone para que imprima la totalidad del texto
+
+    def on_cboxDende_changed(self, combo):
+        puntero = self.cboxDende.get_active_iter()
+        if puntero is not None:
+            modelo = combo.get_model()
+            # fila/columna LO IMPRIME EN EL TERMINAL
+            print("El aeropuerto seleccionado es: " + modelo[puntero][1] + " (" + modelo[puntero][2] + ")")
 
 
 if __name__ == "__main__":
