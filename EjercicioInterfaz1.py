@@ -9,7 +9,7 @@ from gi.repository import Gtk, Gio
 class Ventana(Gtk.Window):
     def __init__(self):
         # Creamos e inicializamos la ventana main
-        Gtk.Window.__init__(self, title="Ejercicio")
+        Gtk.Window.__init__(self, title="Ejercicio sin Glade")
         # Le damos un tamaño inicial
         self.set_default_size(400, 200)
 
@@ -26,6 +26,7 @@ class Ventana(Gtk.Window):
         lblDende = Gtk.Label("Dende:")
         grid.attach_next_to(lblDende, lblData, Gtk.PositionType.BOTTOM, 1, 1)
         lblAta = Gtk.Label("Ata:")
+        # Recordar en las posiciones --> Columna/Fila
         grid.attach(lblAta, 0, 2, 1, 1)
         # Entrada de texto:
         txtData = Gtk.Entry()
