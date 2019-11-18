@@ -61,7 +61,7 @@
       </packing>
     </child>
     <child>
-      <object class="GtkComboBox" id="cBoxAta">
+      <object class="GtkComboBox" id="cboxAta">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
       </object>

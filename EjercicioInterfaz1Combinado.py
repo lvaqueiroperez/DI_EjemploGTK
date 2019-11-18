@@ -48,17 +48,19 @@ class Ventana(Gtk.Window):
         # CÓDIGO PARA TRABAJAR CON ELLOS O MODIFICARLOS
         self.txtEntData = builder.get_object("txtEntData")
         self.cboxDende = builder.get_object("cboxDende")
+        self.cboxAta = builder.get_object("cboxAta")
         # EN GLADE, DEFINIMOS EL MANIPULADOR DE "CHANGED" DE cboxDende
 
         # Creamos señales que accederán a métodos
         # OJO, AL USAR CON GLADE LAS SEÑALES ACTIVATE O CUALQUIERA QUE
         # USEMOS TIENEN QUE ESTAR ESPECIFICADAS EN EL PROPIO GLADE !!!
+        # NO CREAMOS UNA SEÑAL PARA EL CBOX ATA
         señales = {"on_txtEntData_activate": self.on_txtEntData_activate,
                    "on_cboxDende_changed": self.on_cboxDende_changed}
 
         builder.connect_signals(señales)
 
-        # CREAMOS UNA LIST STORE PARA...
+        # CREAMOS UNA LIST STORE PARA...  (cboxDende)
         lista_destinos = Gtk.ListStore(int, str, str)
         # Para añadir elementos:
         lista_destinos.append([1, "Vigo", "VGO"])
@@ -73,6 +75,19 @@ class Ventana(Gtk.Window):
         self.cboxDende.pack_start(celdaTexto, True)
         # Queremos que inicialmente muestre la columna 1 como texto
         self.cboxDende.add_attribute(celdaTexto, "text", 2)
+
+        # AÑADIMOS ITEMS A cboxAta:
+
+        lista_iconos = Gtk.ListStore(str, str)
+        lista_iconos.append(["novo", "document-new"])
+        lista_iconos.append(["Abrir", "document-open"])
+        lista_iconos.append(["Guardar", "document-save"])
+
+        self.cboxAta.set_model(lista_iconos)
+        celdaImagen = Gtk.CellRendererPixbuf()
+        self.cboxAta.pack_start(celdaImagen, True)
+        # PONER ICON_NAME PARA QUE FUNCIONEN LOS ICONOS !!!
+        self.cboxAta.add_attribute(celdaImagen, "icon_name", 1)
 
         # Creamos el formulario de opciones a través de un frame que contendrá una caja con 3 RadioButtons
         frmOpcions = Gtk.Frame()
