@@ -69,13 +69,15 @@ class Fiestra(Gtk.Window):
         celdaTexto = Gtk.CellRendererText()
         cmbDende.set_entry_text_column(1)
         cmbDende.pack_start(celdaTexto, True)
-        cmbDende.add_attribute(celdaTexto, "text", 2)
+        cmbDende.add_attribute(celdaTexto, "text", 1)
 
         # CONECTAMOS LAS SEÑALES (PARA QUE FUNCIONE, NECESITAMOS UNA REFERENCIA AL ELEMENTO DE TXTENTRY, PARA QUE AL PULSAR ENTER NOS VAYA)
         cmbDende.connect("changed", self.on_cmbDende_changed)
         # Esto !!!
-        txtDende = cmbDende.get_child()
-        txtDende.connect("activate", self.on_txtDende_activate)
+        self.txtDende = cmbDende.get_child()
+        self.txtDende.connect("activate", self.on_txtDende_activate)
+
+
 
         grid.attach_next_to(cmbDende, lblDende, Gtk.PositionType.RIGHT, 1, 1)
         cmbAta = Gtk.ComboBox()
@@ -153,11 +155,16 @@ class Fiestra(Gtk.Window):
             fin = self.bufferTxv.get_end_iter()
             self.bufferTxv.insert(fin,entry.get_text())"""
 
+    #ARREGLAR !!!!!!!
     def on_txtDende_activate(self, entry):
 
         fin = self.bufferTxv.get_end_iter()
-        self.bufferTxv.insert(fin, entry.get_text())
+        texto = entry.get_text()
+        self.bufferTxv.insert(fin, texto)
 
+        modelo = self.cmbDende.get_model()
+
+        modelo.append([1,texto,"txt"])
 
 if __name__ == "__main__":
     Fiestra()
