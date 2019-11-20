@@ -1,6 +1,6 @@
 # COPIAMOS EL EJERCICIO INTERFAZ 1 Y QUITAMOS TODOS LOS ELEMENTOS PUESTOS A TRAVÉS DE GLADE (LA GRID DONDE ESTAABAN LOS COMBOBOX ETC) Y LO MOFICAMOS
-#(al final hemos copiado el código del profe)
-#PREGUNTAR QUÉ SE HA HECHO
+# (al final hemos copiado el código del profe)
+# PREGUNTAR QUÉ SE HA HECHO
 import gi
 
 gi.require_version('Gtk', '3.0')
@@ -64,11 +64,18 @@ class Fiestra(Gtk.Window):
         lista_destinos.append([2, "Santiago de Compostela", "SCO"])
         lista_destinos.append([3, "Madrid", "MAD"])
         lista_destinos.append([4, "Barcelona", "BCN"])
+        # Vamos a buscar dentro del combo box sus items, para ello primero ponemos una modelo con Entry:
         cmbDende = Gtk.ComboBox.new_with_model_and_entry(lista_destinos)
         celdaTexto = Gtk.CellRendererText()
         cmbDende.set_entry_text_column(1)
         cmbDende.pack_start(celdaTexto, True)
         cmbDende.add_attribute(celdaTexto, "text", 2)
+
+        # CONECTAMOS LAS SEÑALES (PARA QUE FUNCIONE, NECESITAMOS UNA REFERENCIA AL ELEMENTO DE TXTENTRY, PARA QUE AL PULSAR ENTER NOS VAYA)
+        cmbDende.connect("changed", self.on_cmbDende_changed)
+        # Esto !!!
+        txtDende = cmbDende.get_child()
+        txtDende.connect("activate", self.on_txtDende_activate)
 
         grid.attach_next_to(cmbDende, lblDende, Gtk.PositionType.RIGHT, 1, 1)
         cmbAta = Gtk.ComboBox()
@@ -134,10 +141,22 @@ class Fiestra(Gtk.Window):
             self.bufferTxv.insert(fin, "\n", -1)
 
     def on_cmbDende_changed(self, combo):
-        punteiro = self.cmbDende.get_active_iter()
+        punteiro = combo.get_active_iter()
         if punteiro is not None:
             modelo = combo.get_model()
             print("O aeroporto seleccionado é: " + modelo[punteiro][1] + " (" + modelo[punteiro][2] + ")")
+
+            # CON SOLO EL "CHANGED" DE CBOX NO VA, NECESITAMOS UNA REFERENCIA DEL TXTENTRY QUE TIENE EL CBOX
+        """else:
+            # Si el puntero no se activa, significaría que estamos usando el cuadro de búsqueda del cbox
+            entry = combo.get_child()
+            fin = self.bufferTxv.get_end_iter()
+            self.bufferTxv.insert(fin,entry.get_text())"""
+
+    def on_txtDende_activate(self, entry):
+
+        fin = self.bufferTxv.get_end_iter()
+        self.bufferTxv.insert(fin, entry.get_text())
 
 
 if __name__ == "__main__":
