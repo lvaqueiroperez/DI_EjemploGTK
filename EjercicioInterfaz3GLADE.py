@@ -1,11 +1,11 @@
-# COPIAMOS EL EJERCICIO INTERFAZ 1 Y QUITAMOS TODOS LOS ELEMENTOS PUESTOS A TRAVÉS DE GLADE (LA GRID DONDE ESTAABAN LOS COMBOBOX ETC) Y LO MOFICAMOS
-# (al final hemos copiado el código del profe)
-
 import gi
 
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gio
 
+
+# ARREGLAR EN CASA
+# ESQUEMA EN LIBRETA, USAMOS GLADE PARA LA GRID QUE CONTIENE LA BOX H1
 
 class Fiestra(Gtk.Window):
     def __init__(self):
@@ -15,13 +15,14 @@ class Fiestra(Gtk.Window):
         caixaV = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         caixaH1 = Gtk.Box()
 
-        """
         builder = Gtk.Builder()
-        builder.add_from_file("aplicacionGrid.glade")
-        grade = builder.get_object("grdGrade")
+        builder.add_from_file("EjercicioInterfaz3GLADE.glade")
+        grid1 = builder.get_object("grid1")
         self.txtData = builder.get_object("txtData")
-        self.cmbDende = builder.get_object("cmbDende")
-        self.cmbAta = builder.get_object("cmbAta")
+        self.cboxDende = builder.get_object("cboxDende")
+        self.cboxAta = builder.get_object("cboxAta")
+        lblAta = builder.get_object("lblAta")
+        lblDende = builder.get_object("lblDende")
 
         sinais = {"on_txtData_activate": self.on_txtData_activate,
                   "on_cmbDende_changed": self.on_cmbDende_changed}
@@ -32,13 +33,14 @@ class Fiestra(Gtk.Window):
         lista_destinos.append([2, "Santiago de Compostela", "SCO"])
         lista_destinos.append([3, "Madrid", "MAD"])
         lista_destinos.append([4, "Barcelona", "BCN"])
-        self.cmbDende.set_model(lista_destinos)
+        self.cboxDende.set_model(lista_destinos)
         celdaTexto = Gtk.CellRendererText()
-        self.cmbDende.set_entry_text_column(1)
+        self.cboxDende.set_entry_text_column(1)
 
-        self.cmbDende.pack_start(celdaTexto, True)
-        self.cmbDende.add_attribute(celdaTexto, "text", 2)
+        self.cboxDende.pack_start(celdaTexto, True)
+        self.cboxDende.add_attribute(celdaTexto, "text", 2)
 
+        """
         lista_iconos = Gtk.ListStore(str, str)
         lista_iconos.append(["Novo", "document-new"])
         lista_iconos.append(["Abrir", "document-open"])
@@ -48,7 +50,7 @@ class Fiestra(Gtk.Window):
         self.cmbAta.pack_start(celdaImaxe, True)
         self.cmbAta.add_attribute(celdaImaxe, "icon_name", 1)
         """
-
+        """
         grid = Gtk.Grid()
         lblData = Gtk.Label("Data:")
         grid.add(lblData)  # lo pone en el primero
@@ -64,46 +66,48 @@ class Fiestra(Gtk.Window):
         lista_destinos.append([2, "Santiago de Compostela", "SCO"])
         lista_destinos.append([3, "Madrid", "MAD"])
         lista_destinos.append([4, "Barcelona", "BCN"])
+        
+        """
         # Vamos a buscar dentro del combo box sus items, para ello primero ponemos una modelo con Entry:
-        self.cmbDende = Gtk.ComboBox.new_with_model_and_entry(lista_destinos)
+        self.cboxDende = Gtk.ComboBox.new_with_model_and_entry(lista_destinos)
         celdaTexto = Gtk.CellRendererText()
-        self.cmbDende.set_entry_text_column(1)
-        self.cmbDende.pack_start(celdaTexto, True)
-        self.cmbDende.add_attribute(celdaTexto, "text", 1)
+        self.cboxDende.set_entry_text_column(1)
+        self.cboxDende.pack_start(celdaTexto, True)
+        self.cboxDende.add_attribute(celdaTexto, "text", 1)
 
         # CONECTAMOS LAS SEÑALES (PARA QUE FUNCIONE, NECESITAMOS UNA REFERENCIA AL ELEMENTO DE TXTENTRY, PARA QUE AL PULSAR ENTER NOS VAYA)
-        self.cmbDende.connect("changed", self.on_cmbDende_changed)
+        self.cboxDende.connect("changed", self.on_cmbDende_changed)
         # Esto !!!
-        self.txtDende = self.cmbDende.get_child()
+        self.txtDende = self.cboxDende.get_child()
         self.txtDende.connect("activate", self.on_txtDende_activate)
 
-        grid.attach_next_to(self.cmbDende, lblDende, Gtk.PositionType.RIGHT, 1, 1)
+        grid1.attach_next_to(self.cboxDende, lblDende, Gtk.PositionType.RIGHT, 1, 1)
         cmbAta = Gtk.ComboBox()
-        grid.attach_next_to(cmbAta, lblAta, Gtk.PositionType.RIGHT, 1, 1)
+        grid1.attach_next_to(cmbAta, lblAta, Gtk.PositionType.RIGHT, 1, 1)
 
         frmOpcions = Gtk.Frame()
         frmOpcions.set_label("Opcións")
         caixaFrm = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         frmOpcions.add(caixaFrm)
+
         # HACER QUE LOS BOTONES SE PUEDAN SELECCIONAR BIEN Y QUE APAREZCA SU TEXTO ABAJO EN LA TXTVIEW:
-
-        rbtPrimeira = Gtk.RadioButton("Primeira clase")
-        rbtNegocios = Gtk.RadioButton("Negocios")
-        rbtTurista = Gtk.RadioButton("Turista")
+        self.rbtPrimeira = Gtk.RadioButton("Primeira clase")
+        self.rbtNegocios = Gtk.RadioButton("Negocios")
+        self.rbtTurista = Gtk.RadioButton("Turista")
         # Hacemos grupos (siempre queda uno sin unirse)
-        rbtNegocios.join_group(rbtPrimeira)
-        rbtTurista.join_group(rbtNegocios)
+        self.rbtNegocios.join_group(self.rbtPrimeira)
+        self.rbtTurista.join_group(self.rbtNegocios)
         # conectamos
-        rbtPrimeira.connect("toggled", self.on_rbts_toggle, "Primera\n")
-        rbtNegocios.connect("toggled", self.on_rbts_toggle, "Negocios\n")
-        rbtTurista.connect("toggled", self.on_rbts_toggle, "Turista\n")
+        self.rbtPrimeira.connect("toggled", self.on_rbts_toggle, "Primera\n")
+        self.rbtNegocios.connect("toggled", self.on_rbts_toggle, "Negocios\n")
+        self.rbtTurista.connect("toggled", self.on_rbts_toggle, "Turista\n")
 
-        caixaFrm.pack_start(rbtPrimeira, True, True, 0)
-        caixaFrm.pack_start(rbtNegocios, True, True, 0)
-        caixaFrm.pack_start(rbtTurista, True, True, 0)
+        caixaFrm.pack_start(self.rbtPrimeira, True, True, 0)
+        caixaFrm.pack_start(self.rbtNegocios, True, True, 0)
+        caixaFrm.pack_start(self.rbtTurista, True, True, 0)
         # grid.attach(frmOpcions, 2, 0, 1, 3)
 
-        caixaH1.pack_start(grid, True, True, 0)
+        caixaH1.pack_start(grid1, True, True, 0)
         # caixaH1.pack_start(grade, True, True, 0)
         caixaH1.pack_start(frmOpcions, True, True, 0)
         caixaV.pack_start(caixaH1, True, True, 0)
@@ -180,6 +184,22 @@ class Fiestra(Gtk.Window):
             # pillamos la posicion de buffer (la última)
             fin = self.bufferTxv.get_end_iter()
             self.bufferTxv.insert(fin, "Activado el RadioButton: " + nombre)
+
+    def on_chkPrioridade_toggled(self, control):
+
+        texto = self.txtData.get_text() + "\n"
+        indice = self.cboxDende.get_active_iter()
+        destino = self.cboxDende.get_model([indice][1])
+
+        if self.rbtPrimeira.get_active():
+            clase = "Primera"
+        elif self.rbtNegocios.get_active():
+            clase = "Negocios"
+        else:
+            clase = "Turista"
+
+        text = texto + destino + "\n" + "Clase " + clase + "\n" + "Prioridade na entrada"
+        self.bufferTxv.set_text(texto)
 
 
 if __name__ == "__main__":
