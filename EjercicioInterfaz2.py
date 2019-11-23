@@ -1,6 +1,7 @@
 # COPIAMOS EL EJERCICIO INTERFAZ 1 Y QUITAMOS TODOS LOS ELEMENTOS PUESTOS A TRAVÉS DE GLADE (LA GRID DONDE ESTAABAN LOS COMBOBOX ETC) Y LO MOFICAMOS
 # (al final hemos copiado el código del profe)
 
+
 import gi
 
 gi.require_version('Gtk', '3.0')
@@ -64,40 +65,48 @@ class Fiestra(Gtk.Window):
         lista_destinos.append([2, "Santiago de Compostela", "SCO"])
         lista_destinos.append([3, "Madrid", "MAD"])
         lista_destinos.append([4, "Barcelona", "BCN"])
-        # Vamos a buscar dentro del combo box sus items, para ello primero ponemos una modelo con Entry:
+        # VAMOS A HACER QUE, ADEMÁS DE PODER SELECCIONAR LOS ITEMS DEL CBOX, TAMBIÉN PODAMOS ESCRIBIR EN ÉL Y AÑADIRLE ELEMENTOS ADICIONALES
+        # y le introducimos su modelo
         self.cmbDende = Gtk.ComboBox.new_with_model_and_entry(lista_destinos)
+        # Preparamos el renderer
         celdaTexto = Gtk.CellRendererText()
+        # Ponemos el text entry al cbox
         self.cmbDende.set_entry_text_column(1)
+        # Añadimos al cbox y configuramos su atributo
         self.cmbDende.pack_start(celdaTexto, True)
         self.cmbDende.add_attribute(celdaTexto, "text", 1)
 
         # CONECTAMOS LAS SEÑALES (PARA QUE FUNCIONE, NECESITAMOS UNA REFERENCIA AL ELEMENTO DE TXTENTRY, PARA QUE AL PULSAR ENTER NOS VAYA)
         self.cmbDende.connect("changed", self.on_cmbDende_changed)
-        # Esto !!!
+        # RELACIONAMOS EL TXT QUE TENDRÁ EL CBOX DENDE CON EL PROPIO CBOXDENDE:
         self.txtDende = self.cmbDende.get_child()
+        # LE PONEMOS LA SEÑAL ACTIVATE Y SU FUNCIÓN
         self.txtDende.connect("activate", self.on_txtDende_activate)
 
+        # AÑADIMOS A LA GRID EL CBOX DENDE
         grid.attach_next_to(self.cmbDende, lblDende, Gtk.PositionType.RIGHT, 1, 1)
+        # (y el ata)
         cmbAta = Gtk.ComboBox()
         grid.attach_next_to(cmbAta, lblAta, Gtk.PositionType.RIGHT, 1, 1)
 
+        # AHORA, PARA EL FRAME DE LA BOX1
         frmOpcions = Gtk.Frame()
         frmOpcions.set_label("Opcións")
         caixaFrm = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         frmOpcions.add(caixaFrm)
-        # HACER QUE LOS BOTONES SE PUEDAN SELECCIONAR BIEN Y QUE APAREZCA SU TEXTO ABAJO EN LA TXTVIEW:
 
+        # HACER QUE LOS BOTONES SE PUEDAN SELECCIONAR BIEN Y QUE APAREZCA SU TEXTO ABAJO EN LA TXTVIEW:
         rbtPrimeira = Gtk.RadioButton("Primeira clase")
         rbtNegocios = Gtk.RadioButton("Negocios")
         rbtTurista = Gtk.RadioButton("Turista")
-        # Hacemos grupos (siempre queda uno sin unirse)
+        # Hacemos grupos (siempre queda uno sin unirse, el primero, y los demás se unen a su botón anterior)
         rbtNegocios.join_group(rbtPrimeira)
         rbtTurista.join_group(rbtNegocios)
-        # conectamos
+        # PONEMOS SEÑALES, EL TERCER PARÁMETRO ES EL TEXTO QUE SE ESCRIBIRÁ
         rbtPrimeira.connect("toggled", self.on_rbts_toggle, "Primera\n")
         rbtNegocios.connect("toggled", self.on_rbts_toggle, "Negocios\n")
         rbtTurista.connect("toggled", self.on_rbts_toggle, "Turista\n")
-
+        # Y AÑADIMOS
         caixaFrm.pack_start(rbtPrimeira, True, True, 0)
         caixaFrm.pack_start(rbtNegocios, True, True, 0)
         caixaFrm.pack_start(rbtTurista, True, True, 0)
@@ -108,6 +117,7 @@ class Fiestra(Gtk.Window):
         caixaH1.pack_start(frmOpcions, True, True, 0)
         caixaV.pack_start(caixaH1, True, True, 0)
 
+        # EL FRAME SIGUE IGUAL PERO SIN LOS TEXTOS EN NEGRITA
         frame2 = Gtk.Frame()
         frame2.set_label("Voos disponibles")
         caixaV.pack_start(frame2, True, True, 0)
@@ -136,6 +146,7 @@ class Fiestra(Gtk.Window):
         self.connect("destroy", Gtk.main_quit)
         self.show_all()
 
+    # (no va?)
     def on_txtData_activate(self, control):
 
         seleccion = self.bufferTxv.get_selection_bounds()
@@ -150,6 +161,7 @@ class Fiestra(Gtk.Window):
             self.bufferTxv.insert_markup(fin, "<b>" + self.txtData.get_text() + "</b>", -1)
             self.bufferTxv.insert(fin, "\n", -1)
 
+    # PARA QUE EL CBOX DENDE IMPRIMA LAS SELECCIONES POR CONSOLA:
     def on_cmbDende_changed(self, combo):
         punteiro = combo.get_active_iter()
         if punteiro is not None:
@@ -163,7 +175,7 @@ class Fiestra(Gtk.Window):
             fin = self.bufferTxv.get_end_iter()
             self.bufferTxv.insert(fin,entry.get_text())"""
 
-    # ARREGLAR !!!!!!!
+    # PARA QUE EL TEXTO DE CBOX DENDE SE AÑADA COMO ITEM AL CBOXDENDE
     def on_txtDende_activate(self, entry):
 
         fin = self.bufferTxv.get_end_iter()
@@ -174,6 +186,7 @@ class Fiestra(Gtk.Window):
 
         modelo.append([1, texto, "txt"])
 
+    # PARA QUE LOS RADIOBUTTON IMPRIMAN EN EL TXTVIEW SU NOMBRE INDICANDO QUE SE HAN ACTIVADO:
     def on_rbts_toggle(self, control, nombre):
 
         if control.get_active():

@@ -47,6 +47,7 @@ class Ventana(Gtk.Window):
 
         # PODEMOS RECOGER ELEMENTOS ECHOS EN GLADE EN NUESTRO
         # CÓDIGO PARA TRABAJAR CON ELLOS O MODIFICARLOS
+        # PONEMOS SELF. PARA PODER RECOGER Y USAR VARIABLES DE LA CLASE EN LAS FUNCIONES DE LA CLASE
         self.txtEntData = builder.get_object("txtEntData")
         self.cboxDende = builder.get_object("cboxDende")
         self.cboxAta = builder.get_object("cboxAta")
@@ -79,7 +80,7 @@ class Ventana(Gtk.Window):
 
         self.cboxDende.pack_start(celdaTexto, True)
         # Y UN ATRIBUTO
-        # Queremos que inicialmente muestre la columna 1 como texto
+        # Queremos que inicialmente muestre la columna 2 como texto
         self.cboxDende.add_attribute(celdaTexto, "text", 2)
 
         # AÑADIMOS ITEMS A cboxAta:
@@ -113,7 +114,7 @@ class Ventana(Gtk.Window):
         frmOpcions.add(caixaFrm)
 
         # Añadimos a la grid el frame en la posición deseada (OJO, EXISTE LA POSICIÓN 0 !!!)
-        # PARA QUE FUNCIONE LA COMBINACION CON GLADE, COMENTAMOS ESA LINEA
+        # PARA QUE FUNCIONE LA COMBINACION CON GLADE, COMENTAMOS ESA LINEA (teníamos el frame como parte del grid, ahora ya no)
 
         # grid.attach(frmOpcions, 2, 0, 1, 3)
 
@@ -135,18 +136,21 @@ class Ventana(Gtk.Window):
         # PARA RECOGER UNA REFERENCIA AL BUFFER DEL TEXTVIEW QUE USAREMOS EN LOS MÉTODOS:
         self.bufferTxv = txvVoosDisponibles.get_buffer()
 
-        # HACEMOS QUE EL txtView SEA EDITABLE Y QUE SUS TEXTOS ESTÉN SIEMPRE CENTRADOS
+        # PONEMOS EL txtView "editable" A FALSE PARA QUE NO SE PUEDA ESCRIBIR EN ÉL DIRECTAMENTE Y QUE SUS TEXTOS ESTÉN SIEMPRE CENTRADOS
         txvVoosDisponibles.set_editable(False)
         txvVoosDisponibles.set_justification(Gtk.Justification.CENTER)
 
-        # CREAMOS UN SCROLL PARA EL TXTVIEW Y AÑADIMOS A ESTA VENTANA DE SCROLL NUESTRO TXTVIEW
+        # CREAMOS UNA VENTANA SCROLL PARA EL TXTVIEW Y AÑADIMOS A ESTA VENTANA DE SCROLL NUESTRO TXTVIEW
         ventanaScroll = Gtk.ScrolledWindow()
         ventanaScroll.set_hexpand(True)
         ventanaScroll.set_vexpand(True)
+        # AÑADIMOS A LA VENTANA CON SCROLL NUESTRO TEXTVIEW
         ventanaScroll.add(txvVoosDisponibles)
+        # Ponemos la label al frame
         frame2.set_label("Voos disponibles")
-        # Añadimos al frame la textview LO COMENTAMOS PARA IMPLEMENTAR EL SCROLL
+        # Añadimos al frame la textview (LO COMENTAMOS PARA IMPLEMENTAR EL SCROLL)
         # frame2.add(txvVoosDisponibles)
+        # AÑADIMOS LA VENTANA SCROLL CON TODOS SUS ELEMENTOS AL FRAME
         frame2.add(ventanaScroll)
         # Añadimos a la caja principal el frame de su segundo elemento
         caixaVMain.pack_start(frame2, True, True, 0)
@@ -168,7 +172,7 @@ class Ventana(Gtk.Window):
         self.connect("destroy", Gtk.main_quit)
         self.show_all()
 
-    # MÉTODOS: (tienen que estar fuera del self !!!)
+    # MÉTODOS: (tienen que estar a la misma altura que el de __init__ !!!)
 
     # PARA ESCRIBIR EN LA TEXTVIEW
     def on_txtEntData_activate(self, control):
@@ -184,7 +188,7 @@ class Ventana(Gtk.Window):
 
         # OBTENEMOS EL ITERADOR PARA SABER DONDE ESTÁ EL FINAL DEL ÚLTIMO TEXTO ESCRITO (variable buffer definida anteriormente)
         posFin = self.bufferTxv.get_end_iter()
-        # INSERTAMOS TEXTO SIN QUE LO SOBREESCRIBA Y CON MARCAS DE HTML
+        # INSERTAMOS TEXTO SIN QUE LO SOBREESCRIBA Y CON MARCAS DE HTML (negrita)
         self.bufferTxv.insert_markup(posFin, "<b>" + self.txtEntData.get_text() + "</b>", -1)
         # INSERTAMOS UN SALTO DE LÍNEA PARA QUE SE ESCRIBA MEJOR
         self.bufferTxv.insert(posFin, "\n", -1)
