@@ -21,6 +21,11 @@ class Fiestra(Gtk.Window):
         lblAta = builder.get_object("lblAta")
         lblDende = builder.get_object("lblDende")
 
+        #RECOGEMOS LOS NUEVOS CHECKBUTTON:
+        self.chkPrior = builder.get_object("chkPrioridade")
+        self.chkMaleta = builder.get_object("chkMaletaDeMano")
+        self.chkSalida = builder.get_object("chkSalidaDeEmergencia")
+
         sinais = {"on_txtData_activate": self.on_txtData_activate,
                   "on_cmbDende_changed": self.on_cmbDende_changed}
         builder.connect_signals(sinais)
