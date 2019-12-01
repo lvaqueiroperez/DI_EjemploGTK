@@ -3,7 +3,7 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gio
 
-
+#ARREGLAR
 class Fiestra(Gtk.Window):
     def __init__(self):
         Gtk.Window.__init__(self, title="Reserva de voos")
