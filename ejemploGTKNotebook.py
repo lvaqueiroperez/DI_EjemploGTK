@@ -14,12 +14,14 @@ class Ventana(Gtk.Window):
 
         # Creamos "páginas" del notebook a partir de los componentes que queramos, una caja por ejemplo:
         pagina1 = Gtk.Box()
+        # PARA SEPARAR LOS ELEMENTOS DEL BORDE DE LA CAJA, PONEMOS UNA "ANCHURA DE BORDE" QUE LOS SEPARA
         pagina1.set_border_width(10)
         pagina1.add(Gtk.Label("Página por defecto"))
         # Añadimos la "página" a nuestro notebook, pudiendo darle un título a la solapa:
         notebook.append_page(pagina1, Gtk.Label("Título de la solapa"))
 
         # Creamos un objeto de la Clase reutilizada "Panel" y lo añadimos como página
+        # ESE OBJETO DE LA CLASE "Panel" CONTIENE YA DIRECTAMENTE UNA GRID
         pagina2 = Panel()
         notebook.append_page(pagina2, Gtk.Label("Botones"))
 
@@ -30,6 +32,7 @@ class Ventana(Gtk.Window):
         pagina4 = Gtk.Box()
         pagina4.set_border_width(10)
         pagina4.add(Gtk.Label("Página con icono en la pestaña"))
+        # SI QUEREMOS QUE EL TÍTULO DE LA SOLAPA SEA UN ICONO:
         notebook.append_page(pagina4, Gtk.Image.new_from_icon_name("help-about", Gtk.IconSize.MENU))
 
         self.add(notebook)
@@ -42,6 +45,7 @@ class Ventana(Gtk.Window):
 
 
 # VAMOS A USAR EL CÓDIGO DE "EJEMPLOGTKGRID"
+# AQUÍ, EN VEZ DE CREAR UNA VENTANA CON UN GRID CREAMOS SOLO EL COMPONENTE GRID PARA ASÍ PODER USARLO EN OTRAS CLASES DE MANERA FÁCIL
 ####################################################
 class Panel(Gtk.Grid):
     def __init__(self):
@@ -72,7 +76,6 @@ class Panel(Gtk.Grid):
         self.attach_next_to(boton5, boton4, Gtk.PositionType.BOTTOM, 1, 1)
         self.attach_next_to(boton6, boton5, Gtk.PositionType.RIGHT, 1, 1)
 
-
         # Creamos una caja
         # Por defecto, las cajas tienen orientación horizontal
         caja = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
@@ -83,7 +86,7 @@ class Panel(Gtk.Grid):
 
         # Una vez tengamos todos listo, añadimos la grid
         self.add(grid)
-        #Esto es una clase Grid que usaremos en nuestra interfaz, NO ES LA VENTANA PRINCIPAL DE LA INTERFAZ
+        # Esto es una clase Grid que usaremos en nuestra interfaz, NO ES LA VENTANA PRINCIPAL DE LA INTERFAZ
         #################################################
 
 

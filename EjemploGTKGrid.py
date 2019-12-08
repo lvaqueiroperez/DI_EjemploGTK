@@ -5,6 +5,8 @@ from gi.repository import Gtk
 
 
 # Creación de Grid usando solo código (ver dibujo en libreta)
+#OJO!!! ESTA GRID SE HA CREADO COMO UNA VENTANA CON UN COMPONENTE GRID, PERO PODRÍAMOS HABER CREADO UNA GRID COMO UN COMPONENTE
+#HEREDANDO DE "GTk.Grid"
 class Ventana(Gtk.Window):
     def __init__(self):
         Gtk.Window.__init__(self, title="EJemplo con Gtk.Grid")

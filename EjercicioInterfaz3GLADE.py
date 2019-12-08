@@ -3,7 +3,8 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gio
 
-#ARREGLAR
+
+# ARREGLAR
 class Fiestra(Gtk.Window):
     def __init__(self):
         Gtk.Window.__init__(self, title="Reserva de voos")
@@ -21,7 +22,7 @@ class Fiestra(Gtk.Window):
         lblAta = builder.get_object("lblAta")
         lblDende = builder.get_object("lblDende")
 
-        #RECOGEMOS LOS NUEVOS CHECKBUTTON:
+        # RECOGEMOS LOS NUEVOS CHECKBUTTON:
         self.chkPrior = builder.get_object("chkPrioridade")
         self.chkMaleta = builder.get_object("chkMaletaDeMano")
         self.chkSalida = builder.get_object("chkSalidaDeEmergencia")

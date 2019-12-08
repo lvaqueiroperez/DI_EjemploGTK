@@ -30,7 +30,7 @@ class Ventana(Gtk.Window):
         chkIzquierdaDerecha.connect("toggled", self.on_chkIzquierdaDerecha_toggled)
         cajaV.pack_start(chkIzquierdaDerecha, True, True, 0)
 
-        # Variables necesarioas para el funcionamiento de la barra de estado
+        # Variables necesarioas para el funcionamiento de la barra de estado (VER FUNCIÓN "on_timeout")
         self.timeout_id = GLib.timeout_add(50, self.on_timeout, None)
         self.activity_mode = False
 
@@ -45,6 +45,7 @@ class Ventana(Gtk.Window):
     def on_chkTexto_toggled(self, control):
         # Recogemos el estado del chkButton con "control.get_active()" cada vez que clickamos en él
         mostrarTexto = control.get_active()
+        # NO HACE FALTA PONER EL IF/ELSE, CON TENER UN "TEXTO = Mensaje...." LLEGA
         if mostrarTexto:
             texto = "Mensaje a mostrar"
         else:

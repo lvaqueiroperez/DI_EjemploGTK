@@ -10,28 +10,31 @@ class Ventana(Gtk.Window):
     def __init__(self):
         Gtk.Window.__init__(self, title="Ejemplo stack")
 
-        # Creamos una caja
+        # CREAMOS UNA CAJA QUE CONTENDRA LA TOTALIDAD DE LOS ELEMENTOS
         caja = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
         # Creamos el Stack
         stack = Gtk.Stack()
         # Podemos poner un efecto de transición a sus elementos
         stack.set_transition_type(Gtk.StackTransitionType.SLIDE_LEFT_RIGHT)
-        stack.set_transition_duration(1000)
+        stack.set_transition_duration(2000)
 
         casillaVerification = Gtk.CheckButton("Pulsame")
-
+        # PARA AÑADIR ELEMENTOS AL STACK:
         stack.add_titled(casillaVerification, "check", "Casilla verificacion")
 
         etiqueta = Gtk.Label()
+        # PARA PONER ESTILOS HTML EN LABELS:
         etiqueta.set_markup("<big>Una etiqueta simple</big>")
         stack.add_titled(etiqueta, "etiqueta", "una etiqueta simple")
 
         panel = Panel()
         stack.add_titled(panel, "Panel", "Panel con botones")
 
+        # PARA QUE EL STACK FUNCIONE HACE FALTA CREAR UN "STACK_SWITCHER" DONDE METER NUESTRO STACK:
         stack_switcher = Gtk.StackSwitcher()
         stack_switcher.set_stack(stack)
 
+        # METEMOS EN LA CAJA EL STACK_SWITCHER Y EL STACK
         caja.pack_start(stack_switcher, True, True, 0)
         caja.pack_start(stack, True, True, 0)
 

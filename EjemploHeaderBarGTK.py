@@ -19,6 +19,7 @@ class Ventana(Gtk.Window):
         cabecera.props.title = "Muestra de uso de HeaderBar"
         # cabecera.set_title("Muestra de uso de una cabecera/headerbar")
 
+        # CREAMOS UN BOTÓN QUE PONDREMOS EN NUESTRA CABECERA:
         boton = Gtk.Button()
         # Creamos un icono basado en los que ya están guardados en el SO !!!
         icon = Gio.ThemedIcon(name='mail-send-receive-symbolic')
