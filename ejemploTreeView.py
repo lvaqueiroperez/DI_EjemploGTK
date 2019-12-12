@@ -22,9 +22,9 @@ class WPrincipal1(Gtk.Window):
         # Vista
         vista = Gtk.TreeView(model=modeloList)
 
-        # RENDERERS: (un renderer por columna añadida al treeView)
+        # RENDERERS: (un renderer por columna añadida al treeView)(también podemos usar un mismo renderer para varias columnas si nos lo podemos permitir)
         celdaText = Gtk.CellRendererText()
-        celdaText.set_property("editable", False)  # No podemos modificar esta celda
+        celdaText.set_property("editable", False)  # Quitamos la edición de esta celda
         columnaHotel = Gtk.TreeViewColumn('Alojamiento', celdaText, text=0)
 
         celdaDireccion = Gtk.CellRendererText()

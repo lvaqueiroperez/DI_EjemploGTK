@@ -3,7 +3,7 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, GLib
 
-
+#VAMOS A IMPLEMENTAR NUEVOS BOTONES Y LA OPCIÓN DE MODIFICAR DATOS YA PUESTOS
 class Fiestra(Gtk.Window):
 
     def __init__(self):  # constructor
