@@ -76,7 +76,7 @@ class Exame(Gtk.Window):
 
         caixaV.pack_start(grid, True, True, 0)
 
-        # CAJA DE ABAJO
+        # CAJA DE ABAJO (hay 2 archivos de glade)
         caixaH = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
 
         builder = Gtk.Builder()

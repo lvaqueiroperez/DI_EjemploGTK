@@ -22,7 +22,7 @@ class VentanaPrincipal(Gtk.Window):
         # Una vez creada la Ventana y la Caja, empezamos a CREAR Y CONFIGURAR los elementos de la interfaz QUE IRÁN EN LA CAJA
         self.btnSaludar = Gtk.Button(label="Saludo")
         # Configuramos la señal que tendrá este elemento y a que método accederá (definimos el método más adelante)
-        #Cada señal tiene un nombre !!!
+        #CADA SEÑAL TIENE UN NOMBRE ESPECÍFICO !!!
         self.btnSaludar.connect("clicked", self.on_btnSaludar_clicked)
 
         # Cada vez que introducimos un elemento nuevo, habrá que añadirlo con "pack_start()" o "pack_end()" al elemento que queramos (en este caso a la caja)
@@ -58,7 +58,7 @@ class VentanaPrincipal(Gtk.Window):
     def on_btnSaludar_clicked(self, boton):
         nombre = self.txtNombre.get_text()
         self.lbSaludo.set_text("Hola " + nombre)
-
+    #Para que funcione correctamente:
     def on_txtNombre_activate(self, cuadroTexto):
         self.on_btnSaludar_clicked(cuadroTexto)
 

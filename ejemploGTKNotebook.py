@@ -5,7 +5,7 @@ from gi.repository import Gtk
 
 
 # LO MUESTRA MAL?????????
-# Cración de Notebook GTK usando solo código Y REUTILIZANDO EL CÓDIGO DE "EjemploGTKGrid" DE ANTES
+# Creación de Notebook GTK usando solo código Y REUTILIZANDO EL CÓDIGO DE "EjemploGTKGrid" DE ANTES
 class Ventana(Gtk.Window):
     def __init__(self):
         Gtk.Window.__init__(self, title="Ejemplo con Gtk Notebook")
@@ -45,7 +45,7 @@ class Ventana(Gtk.Window):
 
 
 # VAMOS A USAR EL CÓDIGO DE "EJEMPLOGTKGRID"
-# AQUÍ, EN VEZ DE CREAR UNA VENTANA CON UN GRID CREAMOS SOLO EL COMPONENTE GRID PARA ASÍ PODER USARLO EN OTRAS CLASES DE MANERA FÁCIL
+# AQUÍ, EN VEZ DE CREAR UNA VENTANA CON UN GRID CREAMOS SOLO EL COMPONENTE GRID PARA ASÍ PODER USARLO EN OTRAS CLASES DE MANERA FÁCIL !!!
 ####################################################
 class Panel(Gtk.Grid):
     def __init__(self):

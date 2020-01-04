@@ -24,7 +24,7 @@ class Ventana(Gtk.Window):
         # El primer botón solo hace falta añadirlo para que aparezca en 0,0 (esquina superior izquierda), los demás se añadirán tomándolo como referencia
         grid.add(boton1)
 
-        # Tras indicar el parámetro, podemos indicar su posición COLUMNA-FILA,y su ancho y alto
+        # Tras indicar el parámetro, podemos indicar su posición COLUMNA-FILA,y su ANCHO-ALTO
 
         grid.attach(boton2, 1, 0, 2, 1)
 

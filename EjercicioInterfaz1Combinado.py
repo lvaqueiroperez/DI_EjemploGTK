@@ -194,7 +194,7 @@ class Ventana(Gtk.Window):
         self.bufferTxv.insert(posFin, "\n", -1)
         # -1 se pone para que imprima la totalidad del texto
 
-    # PARA DEFINIR EL CONTENIDO DEL COMBOBOX DENDE
+    # PARA DEFINIR EL CONTENIDO DEL COMBOBOX DENDE Y MOSTRARLO POR EL TERMINAL CUANDO LO SELECCIONEMOS
     def on_cboxDende_changed(self, combo):
         # OBTENEMOS ITERADOR DEL CBOXDENDE
         puntero = self.cboxDende.get_active_iter()
