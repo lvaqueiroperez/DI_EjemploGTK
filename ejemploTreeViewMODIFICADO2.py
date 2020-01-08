@@ -18,6 +18,8 @@ class Fiestra(Gtk.Window):
                        1, "*"])
         modelo.append(["Hotel Galeones", "Avda Madrid", 80.88, False, 2, "**"])
         modelo.append(["Hotel Bahia", "Paseo as Avenidas 55", 60.38, True, 5, "*****"])
+        #CREAMOS UN MODELO FILTRADO:
+        modeloFiltrado = modelo.filter_new()
 
         # otro listStore para las categorías
         modeloCat = Gtk.ListStore(str, int)
@@ -27,13 +29,16 @@ class Fiestra(Gtk.Window):
         modeloCat.append(["****", 4])
         modeloCat.append(["*****", 5])
 
-        # Creamos el TreeView añadiéndole un modelo
-        vista = Gtk.TreeView(model=modelo)
+        # Creamos el TreeView añadiéndole un modelo (LO CAMBIAMOS POR EL MODELO FILTRADO)
+        #vista = Gtk.TreeView(model=modelo)
+        vista = Gtk.TreeView(model=modeloFiltrado)
+
+
         # PARA PODER TRABAJAR CON LAS SELECCIONES DEL TREEVIEW
         seleccion = vista.get_selection()
         seleccion.connect("changed", self.on_vista_changed)
 
-        #RECOGEMOS EL MODELO Y EL ITERADOR DEL TREEVIEW PARA PODER MODIFICAR DATOS EN LAS CELDAS DEL TREEVIEW (ver función de modificar)
+        # RECOGEMOS EL MODELO Y EL ITERADOR DEL TREEVIEW PARA PODER MODIFICAR DATOS EN LAS CELDAS DEL TREEVIEW (ver función de modificar)
         self.modeloTV = vista.get_model()
         self.iteradorTV = self.modeloTV.get_iter("0")
 
@@ -47,8 +52,7 @@ class Fiestra(Gtk.Window):
 
         # Creamos una columna con un nombre, un renderer y una variable(text para string, value para nums....) con un valor numérico para
         # establecer qué columna va a mostrar la vista (valores diferentes paar cada columna siempre??)
-        columnaHotel = Gtk.TreeViewColumn('Aloxamento', celdaText,
-                                          text=0)
+        columnaHotel = Gtk.TreeViewColumn('Aloxamento', celdaText, text=0)
         # A la celda "Dirección" le ponemos una señal
         celdaDireccion = Gtk.CellRendererText()
         celdaDireccion.set_property("editable", True)
@@ -59,6 +63,9 @@ class Fiestra(Gtk.Window):
         # La celda "Ocupación" tendrá una barra de progreso
         celdaOcupacion = Gtk.CellRendererProgress()
         columnaOcupacion = Gtk.TreeViewColumn('Ocupación', celdaOcupacion, value=2)
+
+        # LE AÑADIMOS UNA FUNCIÓN QUE HACE QUE LA COLUMNA SE ORDENE DE MAYOR A MENOR Y VICEVERSA CUANDO CLICKAMOS EN EL NOMBRE DE LA COLUMM:
+        columnaOcupacion.set_sort_column_id(2)
 
         # La celda "Check" tendrá checkButtons
         celdaCheck = Gtk.CellRendererToggle()
@@ -171,11 +178,9 @@ class Fiestra(Gtk.Window):
         # print(modelo[punteiro][0], modelo[punteiro][1], modelo[punteiro][2])
 
     # BOTÓN MODIFICAR: acceder a la celda seleccionada y modificar los datos(utilizamos como parámetro nuestra variable ya creada "selección")
-    def on_btnModificar_clicked(self, boton, modelo,seleccion):
+    def on_btnModificar_clicked(self, boton, modelo, seleccion):
 
         """borrar y volver a poner? o usar un método de modificación?"""
-
-
 
 
 if __name__ == "__main__":
