@@ -16,7 +16,7 @@ class Fiestra(Gtk.Window):
         Gtk.Window.__init__(self, title="Ejemplo TreeStore")
 
         #PRUEBA
-        print(os.listdir("/home/dam2/Documentos"))
+        print(os.listdir("/home/dam2/Documentos/"))
 
 
 
